@@ -1,0 +1,15 @@
+export const FeedbackCodes = {
+    _: { code: "E000", message: "Error desconocido." },
+    USER_NOT_FOUND: { code: "", message: "Error al obtener el usuario" },
+    EMAIL_NOT_FOUND: { code: "", message: "El email no existe." },
+    EMAIL_ALREADY_REGISTERED: { code: "", message: "El correo electrónico ya está registrado." },
+    EMAIL_NOT_VERIFIED: { code: "", message: "La cuenta no ha sido verificada." },
+    TOKEN_NOT_GENERATED: { code: "", message: "Error al generar el token de verificación." },
+    TOKEN_NOT_FOUND: { code: "", message: "Error al obtener el token de verificación." },
+    NO_TOKEN: { code: "", message: "No se ha proporcionado un token de verificación." },
+    INVALID_TOKEN: { code: "", message: "El token de verificación no es válido." },
+    TOKEN_EXPIRED: { code: "", message: "El token de verificación ha expirado." },
+    TOKEN_EMAIL_NOT_SENT: { code: "", message: "Error al enviar el correo de verificación." },
+    SUCCESS: { code: "", message: "El correo electrónico ha sido verificado." },
+    LOGGED_IN: { code: "", message: "Sesión iniciada. Bienvenido" },
+};
