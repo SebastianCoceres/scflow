@@ -7,10 +7,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarSeparator, useSidebar } from "@/components/ui/sidebar"
 import { useGetActiveRoute } from "@/lib/routes-utils"
 import { ChevronUp, LogOut, LucideProps, User2Icon } from "lucide-react"
-import { SessionProvider } from "next-auth/react"
 import Link from "next/link"
-import SidebarProfile from "./sidebar_profile"
 import React from "react"
+import SidebarProfile from "./sidebar_profile"
 
 const sidebar_content = [
     {
@@ -83,9 +82,7 @@ export function DesktopSidebar() {
                             <DropdownMenu >
                                 <DropdownMenuTrigger asChild>
                                     <SidebarMenuButton size={"lg"}>
-                                        <SessionProvider>
-                                            <SidebarProfile />
-                                        </SessionProvider>
+                                        <SidebarProfile />
                                         <ChevronUp className="ml-auto" />
                                     </SidebarMenuButton>
                                 </DropdownMenuTrigger>

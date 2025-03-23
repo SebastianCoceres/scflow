@@ -24,7 +24,7 @@ export const Login = async (data: z.infer<typeof LoginSchema>) => {
     const existingUser = await getUserByEmail(email);
 
     if (!existingUser || !existingUser.email || !existingUser.password) return {
-        error: "No se ha encontrado el usuario",
+        error: "El usuario o la contraseña son incorrectos",
     }
 
     if (!existingUser.emailVerified) {

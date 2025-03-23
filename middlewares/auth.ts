@@ -9,7 +9,7 @@ export async function authMiddleware(req: NextRequest & { auth: NextAuthConfig }
     const { nextUrl } = req
     // const token = await getToken({ req, secret });
     const isLoggedIn = Boolean(req.auth);
-    
+
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isPublicRoute = publicRoutes.some((route: { href: string }) => route.href === nextUrl.pathname);
     const isAuthRoute = authRoutes.some((route: { href: string }) => route.href === nextUrl.pathname);

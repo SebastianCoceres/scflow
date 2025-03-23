@@ -1,10 +1,10 @@
 import * as z from "zod"
 
 export const LoginSchema = z.object({
-    email: z.string().email({
-        message: "El correo electrónico no es válido",
-    }).nonempty({
+    email: z.string().nonempty({
         message: "El correo electrónico es requerido",
+    }).email({
+        message: "El correo electrónico no es válido",
     }),
     password: z.string().nonempty({
         message: "La contraseña es requerida",
@@ -49,6 +49,12 @@ export const resetPasswordSchema = z.object({
         }).min(8, {
             message: "La contraseña debe tener al menos 8 caracteres",
         }),
-
-})
+    confirmPassword: z.string()
+        .nonempty({
+            message: "La confirmación de la contraseña es requerida",
+        })
+}).refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"],
+});
 

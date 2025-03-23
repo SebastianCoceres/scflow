@@ -68,6 +68,7 @@ function LoginForm() {
                                         <Input
                                             type="email"
                                             disabled={isPending}
+                                            autoComplete="email"
                                             placeholder="Correo electrónico"
                                             {...field}
                                         />

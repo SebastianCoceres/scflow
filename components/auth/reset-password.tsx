@@ -18,6 +18,7 @@ import { useAuthForm } from "./auth-form"
 import { FormError } from "./form-error"
 import { FormSuccess } from "./form-success"
 import { useCallback } from "react"
+import { FeedbackCodes } from "@/lib/errors"
 
 
 function ResetPasswordForm() {
@@ -27,6 +28,7 @@ function ResetPasswordForm() {
         resolver: zodResolver(resetPasswordSchema),
         defaultValues: {
             password: "",
+            confirmPassword: "",
         },
     })
     const router = useRouter();
@@ -35,7 +37,7 @@ function ResetPasswordForm() {
 
     const onSubmit = useCallback((data: z.infer<typeof resetPasswordSchema>) => {
         if (!token) {
-            dispatch({ type: "error", error: "No se ha proporcionado un token de verificación." });
+            dispatch({ type: "error", error: FeedbackCodes.TOKEN_ERRORS.NOT_FOUND });
             return
         };
         dispatch({ type: "reset" });
@@ -85,9 +87,33 @@ function ResetPasswordForm() {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Confirmar nueva contraseña</FormLabel>
+                                    <FormControl >
+                                        <div className="relative">
+                                            <Input
+                                                className="relative z-0 pr-10"
+                                                disabled={isPending}
+                                                type={showPassword ? 'text' : 'password'}
+                                                placeholder="Contraseña"
+                                                {...field}
+                                            />
+                                            <Button variant={"ghost"} className="absolute right-0 top-1/2 -translate-y-1/2 z-10" type="button" onClick={() => { setShowPassword(prev => !prev) }}>
+                                                {showPassword ? <EyeOff /> : <EyeIcon />}
+                                            </Button>
+                                        </div>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </div>
-                    {(state.error) && <FormError message={state.error} />}
-                    {state.success && <FormSuccess message={state.success} />}
+                    {(state.error) && <FormError code={state.error.code} message={state.error.message} />}
+                    {state.success && <FormSuccess code={state.success.code} message={state.success.message} />}
                     <FooterForm />
 
                 </form>

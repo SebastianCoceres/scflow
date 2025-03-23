@@ -13,21 +13,17 @@ export default {
 
                 if (!validateFields.success) {
                     throw new Error(`${validateFields.error.errors.map((err) => err.message).join(", ")}`);
-                    console.error("Error en la validación del login:", validateFields.error);
-                    return null
                 }
                 const { email, password } = validateFields.data;
 
                 const user = await getUserByEmail(email);
                 if (!user || !user.password) {
-                    throw new Error("No se ha encontrado el usuario");
-                    return null
+                    throw new Error("El usuario o la contraseña son incorrectos");
                 };
 
                 const isPasswordValid = await bcrypt.compare(password, user.password);
                 if (!isPasswordValid) {
-                    throw new Error("Contraseña incorrecta");
-                    return null
+                    throw new Error("El usuario o la contraseña son incorrectos");
                 };
 
                 return user

@@ -1,12 +1,14 @@
 import { CircleX, HomeIcon, KeyRound, Layers2Icon, ShieldCheckIcon, ShieldQuestion, UserIcon, UserPlusIcon } from "lucide-react";
 
-export const routes = [
+interface Route {
+    href: string;
+    label: string;
+    icon: React.ComponentType;
+    disabled: boolean;
+}
+
+export const routes: Route[] = [
     {
-        href: "/",
-        label: "Home",
-        icon: HomeIcon,
-        disabled: false
-    }, {
         href: "/workflows",
         label: "Workflows",
         icon: Layers2Icon,
@@ -14,7 +16,7 @@ export const routes = [
     }
 ]
 
-export const authRoutes = [
+export const authRoutes: Route[] = [
     {
         href: "/auth/login",
         label: "Login",
@@ -49,8 +51,13 @@ export const authRoutes = [
     }
 ]
 
-export const publicRoutes = [
-
+export const publicRoutes: Route[] = [
+    {
+        href: "/",
+        label: "Home",
+        icon: HomeIcon,
+        disabled: false
+    }
 ]
 
 export const apiAuthPrefix = "/api/auth/"

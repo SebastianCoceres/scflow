@@ -42,7 +42,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
             const userExists = await getUserById(user.id)
             if (!userExists) {
-                throw new Error(`El usuario no existe: ${user}")`);
+                throw new Error(`El usuario o la contraseña son incorrectos`);
             }
             if (!userExists?.emailVerified) {
                 throw new Error("El correo electrónico no ha sido verificado");

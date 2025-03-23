@@ -38,6 +38,16 @@ export const resetPassword = async (values: z.infer<typeof resetPasswordSchema>,
     if (!existingUser) return {
         error: ""
     }
+    if (existingUser?.password) {
+        const isSamePassword = await bcrypt.compare(password, existingUser?.password);
+
+        if (isSamePassword) {
+            return {
+                error: "La nueva contraseña debe ser diferente a la contraseña actual.",
+            }
+        }
+    }
+
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
